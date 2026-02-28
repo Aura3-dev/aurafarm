@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
@@ -24,11 +25,13 @@ public class QueryResource {
     @Inject
     DataSource dataSource;
 
+    @RegisterForReflection
     public static class QueryRequest {
         public String sql;
         public String schema;
     }
 
+    @RegisterForReflection
     public static class QueryResponse {
         public List<String> columns = new ArrayList<>();
         public List<String> columnTypes = new ArrayList<>();

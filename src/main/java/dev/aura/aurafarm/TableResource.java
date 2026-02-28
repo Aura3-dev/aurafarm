@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -20,7 +22,9 @@ import jakarta.ws.rs.core.Response;
 @Path("/api/schemas/{schema}/tables")
 public class TableResource {
 
+    @RegisterForReflection
     public record ColumnInfo(String name, String type) {}
+    @RegisterForReflection
     public record TableInfo(String name, List<ColumnInfo> columns) {}
 
     @Inject
