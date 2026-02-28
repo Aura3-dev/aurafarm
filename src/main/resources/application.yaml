@@ -1,0 +1,29 @@
+"%prod":
+  quarkus:
+    log:
+      level: INFO
+      category:
+        org.postgresql:
+          level: DEBUG
+
+    datasource:
+      db-kind: postgresql
+      jdbc:
+        url: ${AURAFARM_DB_URL:jdbc:postgresql://localhost:5432/postgres}
+      username: ${AURAFARM_DB_USERNAME:postgres}
+      password: ${AURAFARM_DB_PASSWORD:postgres}
+
+quarkus:
+  datasource:
+    devservices:
+      port: 5432
+
+  quinoa:
+    package-manager-install:
+      node-version: "24.13.0"
+      npm-version: "11.6.2"
+    dev-server:
+      port: 5173
+    build-dir: dist
+    enable-spa-routing: true
+    ignored-path-prefixes: /api

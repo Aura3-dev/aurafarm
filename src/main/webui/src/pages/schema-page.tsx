@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
 import {
@@ -145,7 +145,7 @@ export function SchemaPage() {
       const res = await executeQuery(sql, name!)
       setResult(res)
     } catch {
-      setResult({ columns: [], rows: [], error: "Failed to execute query" })
+      setResult({ columns: [], rows: [], error: "Failed to execute query", columnTypes: [] })
     } finally {
       setRunning(false)
     }
@@ -168,6 +168,7 @@ export function SchemaPage() {
     })
 
     const provider = monaco.languages.registerCompletionItemProvider("sql", {
+      // @ts-ignore
       provideCompletionItems(model, position) {
         const word = model.getWordUntilPosition(position)
         const range = {
